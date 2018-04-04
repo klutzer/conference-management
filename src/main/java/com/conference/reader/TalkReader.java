@@ -13,13 +13,13 @@ public class TalkReader {
 
     public static List<Talk> readFromInputStream(InputStream input) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(input))) {
-            List<Talk> talks = new ArrayList<>();
+        	List<Talk> talks = new ArrayList<>();
             reader.lines().forEach(line -> talks.add(readSingleTalk(line)));
             return talks;
         }
     }
 
-    private static Talk readSingleTalk(String line) {
+    static Talk readSingleTalk(String line) {
         Talk talk = new Talk();
         talk.setDurationInMinutes(extractDuration(line));
         talk.setDescription(line);
