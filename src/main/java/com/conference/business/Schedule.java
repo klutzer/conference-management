@@ -2,7 +2,7 @@ package com.conference.business;
 
 import java.time.LocalTime;
 
-public class Schedule {
+public class Schedule implements Comparable<Schedule> {
 
     private LocalTime beginTime;
     private Talk talk;
@@ -27,4 +27,9 @@ public class Schedule {
     public String toString() {
         return beginTime + " - " + talk;
     }
+
+	@Override
+	public int compareTo(Schedule o) {
+		return o == null ? -1 : beginTime.compareTo(o.beginTime);
+	}
 }

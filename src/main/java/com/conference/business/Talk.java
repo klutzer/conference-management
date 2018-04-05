@@ -35,7 +35,7 @@ public class Talk implements Comparable<Talk> {
 		if (o == null) {
 			return -1;
 		}
-		return Integer.compare(o.durationInMinutes, durationInMinutes);
+		return Integer.compare(durationInMinutes, o.durationInMinutes);
 	}
 
 	@Override
