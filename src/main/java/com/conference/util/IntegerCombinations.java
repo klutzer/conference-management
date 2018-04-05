@@ -21,12 +21,10 @@ public final class IntegerCombinations {
 		for (int x : list) {
 			sum += x;
 		}
-
 		if (sum <= max && sum >= min) {
 			result.add(new ArrayList<Integer>(list));
 			return;
 		}
-
 		if (sum < min) {
 			for (int i = position; i < candidates.size(); i++) {
 				if (position != i && candidates.get(i) == candidates.get(i - 1)) {
