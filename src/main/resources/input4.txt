@@ -17,7 +17,7 @@ Ruby vs. Clojure for Back-End Development 30min
 Ruby on Rails Legacy App Maintenance 60min
 A World Without HackerNews 30min
 User Interface CSS in Rails Apps 30min
-AWriting Fast Tests Against Enterprise Rails 90min
+AWriting Fast Tests Against Enterprise Rails 80min
 BCommunicating Over Distance 60min
 CRails Magic 60min
 DRuby on Rails: Why We Should Move On 60min
@@ -25,5 +25,7 @@ ECommon Ruby Errors 45min
 FAccounting-Driven Development 45min
 GPair Programming vs Noise 45min
 HUser Interface CSS in Rails Apps 30min
-IRails for Python Developers lightning
-JRails for Python Developers 20min
+IRails for Python Developers 20min
+JRails for Python Developers 10min
+ARails for Python Developers lightning
+BRails for Python Developers lightning
