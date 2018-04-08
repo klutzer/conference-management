@@ -1,14 +1,14 @@
 package com.conference.business;
 
-import java.io.IOException;
-import java.util.List;
-
-import com.conference.reader.TalkReader;
-
 public class Talk implements Comparable<Talk> {
 
 	private String description;
 	private int durationInMinutes;
+
+	public Talk(String description, int durationInMinutes) {
+		this.description = description;
+		this.durationInMinutes = durationInMinutes;
+	}
 
 	public String getDescription() {
 		return this.description;
@@ -24,10 +24,6 @@ public class Talk implements Comparable<Talk> {
 
 	public void setDurationInMinutes(int durationInMinutes) {
 		this.durationInMinutes = durationInMinutes;
-	}
-
-	public static List<Talk> loadAll() throws IOException {
-		return TalkReader.readFromInputStream(Talk.class.getClassLoader().getResourceAsStream("input.txt"));
 	}
 
 	@Override

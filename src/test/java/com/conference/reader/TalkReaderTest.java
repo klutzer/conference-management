@@ -13,7 +13,7 @@ public class TalkReaderTest {
 
 	@Test
 	public void shouldReadAllTalks() throws Exception {
-		List<Talk> talks = Talk.loadAll();
+		List<Talk> talks = TalkReader.readFromString("input.txt");
 		assertThat(talks, hasSize(19));
 	}
 

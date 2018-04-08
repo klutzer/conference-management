@@ -53,4 +53,13 @@ public class IntegerCombinationsTest {
         assertThat(combinations.get(3), contains(4));
     }
 
+    @Test
+    public void testWithMultipleCombinationsAndRepeated() {
+    	List<List<Integer>> combinations = IntegerCombinations.combinate(new Integer[]{1, 3, 3, 3, 4}, 10, 11);
+    	assertThat(combinations, hasSize(3));
+    	assertThat(combinations.get(0), contains(1, 3, 3, 3));
+    	assertThat(combinations.get(1), contains(1, 3, 3, 4));
+    	assertThat(combinations.get(2), contains(3, 3, 4));
+    }
+
 }

@@ -25,7 +25,5 @@ ECommon Ruby Errors 45min
 FAccounting-Driven Development 45min
 GPair Programming vs Noise 45min
 HUser Interface CSS in Rails Apps 30min
-IRails for Python Developers 20min
-JRails for Python Developers 10min
-ARails for Python Developers lightning
-BRails for Python Developers lightning
+IRails for Python Developers lightning
+JRails for Python Developers 20min
