@@ -23,28 +23,28 @@ public class TalkOrganizerTest {
 		TalkOrganizer organizer = createOrganizer("input1Track.txt");
 		List<Track> tracks = organizer.arrangeAll();
 		assertThat(tracks.get(0).getSchedules(), hasSize(11));
-		assertCorrectTraks(tracks, 1);
+		assertCorrectTracks(tracks, 1, 9);
 	}
 
 	@Test
 	public void shouldOrganizeTwoTracks() throws Exception {
 		TalkOrganizer organizer = createOrganizer("input2Tracks.txt");
 		List<Track> tracks = organizer.arrangeAll();
-		assertCorrectTraks(tracks, 2);
+		assertCorrectTracks(tracks, 2, 19);
 	}
 
 	@Test
 	public void shouldOrganizeThreeTracks() throws Exception {
 		TalkOrganizer organizer = createOrganizer("input3Tracks.txt");
 		List<Track> tracks = organizer.arrangeAll();
-		assertCorrectTraks(tracks, 3);
+		assertCorrectTracks(tracks, 3, 29);
 	}
 
 	@Test
 	public void shouldOrganizeSixTracks() throws Exception {
 		TalkOrganizer organizer = createOrganizer("input6Tracks.txt");
 		List<Track> tracks = organizer.arrangeAll();
-		assertCorrectTraks(tracks, 6);
+		assertCorrectTracks(tracks, 6, 57);
 	}
 
 	private TalkOrganizer createOrganizer(String input) throws IOException {
@@ -52,17 +52,28 @@ public class TalkOrganizerTest {
 		return new TalkOrganizer(talks);
 	}
 
-	private void assertCorrectTraks(List<Track> tracks, int expectedSize) {
-		assertThat(tracks, hasSize(expectedSize));		
+	private void assertCorrectTracks(List<Track> tracks, int expectedTrackSize, int expectedTalkSize) {
+		assertThat(tracks, hasSize(expectedTrackSize));
+		assertThat(countSchedules(tracks), equalTo(expectedTalkSize));
 		for (Track track : tracks) {
-			Schedule lunch = getLunch(track);
-			assertThat(lunch, notNullValue());
-			assertThat(lunch.getBeginTime(), equalTo(LocalTime.of(12, 0)));
-			Schedule networking = getNetworking(track);
-			assertThat(networking, notNullValue());
-			assertThat(networking.getBeginTime(), sameOrAfter(LocalTime.of(16, 0)));
-			assertThat(networking.getBeginTime(), sameOrBefore(LocalTime.of(17, 0)));
+			assertCorrectTrack(track);
 		}
+	}
+
+	private void assertCorrectTrack(Track track) {
+		Schedule lunch = getLunch(track);
+		assertThat(lunch, notNullValue());
+		assertThat(lunch.getBeginTime(), equalTo(LocalTime.of(12, 0)));
+		Schedule networking = getNetworking(track);
+		assertThat(networking, notNullValue());
+		assertThat(networking.getBeginTime(), sameOrAfter(LocalTime.of(16, 0)));
+		assertThat(networking.getBeginTime(), sameOrBefore(LocalTime.of(17, 0)));
+	}
+
+	private int countSchedules(List<Track> tracks) {
+		return tracks.stream()
+				.mapToInt(track -> track.getSchedules().size())
+				.sum() - (tracks.size() * 2);
 	}
 
 	private Schedule getLunch(Track track) {

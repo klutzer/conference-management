@@ -14,9 +14,9 @@ public class Main {
 		System.out.print("Reading talks... ");
 		List<Talk> talks = TalkReader.readFromString("input3Tracks.txt");
 		System.out.println("Done!");
-		System.out.print("Arranging...");
 		TalkOrganizer organizer = new TalkOrganizer(talks);
 		System.out.println("Total minutes: " + organizer.calculateTotalMinutes());
+		System.out.print("Arranging... ");
 		List<Track> tracks = organizer.arrangeAll();
 		System.out.print("Done!\n\n");
 		for (int i=0; i<tracks.size(); i++) {

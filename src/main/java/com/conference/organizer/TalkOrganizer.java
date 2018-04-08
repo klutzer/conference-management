@@ -86,23 +86,18 @@ public class TalkOrganizer {
 	}
 
 	private void arrangeAll(Integer[] durations, List<List<Integer>> combinations, int tracks) {
-		arrangeTrack(durations, combinations);
+		arrangeTrack(durations, combinations, tracks == 1);
 		for (int i = 0; i < combinations.size(); i = i + 2) {
 			List<Integer> morning = combinations.get(i);
 			List<Integer> afternoon = combinations.get(i + 1);
-			List<Integer> remaining = new ArrayList<>(Arrays.asList(durations));
-//			Integer[] remaining = Arrays.copyOf(durations, durations.length);
-			removeElements(morning, remaining);
-			removeElements(afternoon, remaining);
-			if (!remaining.isEmpty() && tracks == 1) {
-				count++;
-			}
-			if (remaining.isEmpty() && tracks == 1) {
+			if (tracks == 1) {
 				populateTrack(morning, afternoon);
 				found = true;
-				System.out.println("Passou " + count + " vezes");
 				return;
-			} else if (tracks > 1) {
+			} else {
+				List<Integer> remaining = new ArrayList<>(Arrays.asList(durations));
+				removeElements(morning, remaining);
+				removeElements(afternoon, remaining);
 				arrangeAll(remaining.toArray(new Integer[0]), new ArrayList<>(), --tracks);
 				if (found) {
 					populateTrack(morning, afternoon);
@@ -112,15 +107,13 @@ public class TalkOrganizer {
 			}
 		}
 	}
-	
-	private long count = 0;
 
-	private void arrangeTrack(Integer[] durations, List<List<Integer>> combinations) {
+	private void arrangeTrack(Integer[] durations, List<List<Integer>> combinations, boolean lastTrack) {
 		List<List<Integer>> combinationsMorning = IntegerCombinations.combinate(durations, 180);
 		for (List<Integer> morning : combinationsMorning) {
 			List<Integer> durationsCopy = new ArrayList<>(Arrays.asList(durations));
 			removeElements(morning, durationsCopy);
-			List<List<Integer>> combinationsAfternoon = IntegerCombinations.combinate(durationsCopy.toArray(new Integer[0]), 180, 240);
+			List<List<Integer>> combinationsAfternoon = IntegerCombinations.combinate(durationsCopy.toArray(new Integer[0]), 180, 240, lastTrack);
 			for (List<Integer> afternoon : combinationsAfternoon) {
 				combinations.add(morning);
 				combinations.add(afternoon);
@@ -133,18 +126,6 @@ public class TalkOrganizer {
 			target.remove(a);
 		}
 	}
-
-//	private Integer[] removeElements(List<Integer> source, Integer[] target) {
-//		List<Integer> result = new ArrayList<>();
-//		for (Integer value : source) {
-//			for (Integer retained : target) {
-//				if (value != retained) {
-//					result.add(retained);
-//				}
-//			}
-//		}
-//		return result.toArray(new Integer[0]);
-//	}
 
 	private void populateTrack(List<Integer> morning, List<Integer> afternoon) {
 		result.add(morning);

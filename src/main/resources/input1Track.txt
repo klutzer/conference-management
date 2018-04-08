@@ -1,0 +1,16 @@
+﻿A 60min
+C 30min
+F lightning
+J 30min
+O 30min
+P 30min
+Q 90min
+R 30min
+Z 45min
+AA 30min
+BB 20min
+CC 10min
+DD lightning
+EE 3min
+FF 1min
+GG 1min

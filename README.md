@@ -2,10 +2,10 @@
 
 Compilando:
 ```sh
-$ mvn clean package
+$ mvn clean install
 ```
 
 Executando:
 ```sh
-$ java -jar target/conference-management.jar
+$ java -jar target/conference-management-1.0.0-SNAPSHOT.jar
 ```
