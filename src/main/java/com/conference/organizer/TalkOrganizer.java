@@ -13,7 +13,9 @@ import com.conference.util.IntegerCombinations;
 
 public class TalkOrganizer {
 
-	private static final int MAX_MINUTES_IN_ONE_DAY = 180 + 240;
+	private static final int MIN_MINUTES_FOR_SESSION = 180;
+	private static final int MAX_MINUTES_FOR_SESSION = 240;
+	private static final int MAX_MINUTES_IN_ONE_DAY = MIN_MINUTES_FOR_SESSION + MAX_MINUTES_FOR_SESSION;
 
 	private List<Talk> talks;
 	private boolean found;
@@ -109,11 +111,12 @@ public class TalkOrganizer {
 	}
 
 	private void arrangeTrack(Integer[] durations, List<List<Integer>> combinations, boolean lastTrack) {
-		List<List<Integer>> combinationsMorning = IntegerCombinations.combinate(durations, 180);
+		List<List<Integer>> combinationsMorning = IntegerCombinations.combinate(durations, MIN_MINUTES_FOR_SESSION);
 		for (List<Integer> morning : combinationsMorning) {
 			List<Integer> durationsCopy = new ArrayList<>(Arrays.asList(durations));
 			removeElements(morning, durationsCopy);
-			List<List<Integer>> combinationsAfternoon = IntegerCombinations.combinate(durationsCopy.toArray(new Integer[0]), 180, 240, lastTrack);
+			List<List<Integer>> combinationsAfternoon = IntegerCombinations.combinate(
+					durationsCopy.toArray(new Integer[0]), MIN_MINUTES_FOR_SESSION, MAX_MINUTES_FOR_SESSION, lastTrack);
 			for (List<Integer> afternoon : combinationsAfternoon) {
 				combinations.add(morning);
 				combinations.add(afternoon);

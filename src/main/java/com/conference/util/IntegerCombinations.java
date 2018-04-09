@@ -38,9 +38,11 @@ public final class IntegerCombinations {
 		int sum = sumAll(list);
 		if (sum <= max && sum >= min) {
 			result.add(new ArrayList<Integer>(list));
-			return;
+			if (min == max) {
+				return;
+			}
 		}
-		if (sum < min) {
+		if (sum < max) {
 			for (int i = position; i < candidates.length; i++) {
 				if (position != i && candidates[i] == candidates[i - 1]) {
 					continue;
