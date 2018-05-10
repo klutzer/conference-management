@@ -38,7 +38,7 @@ public final class IntegerCombinations {
 		int sum = sumAll(list);
 		if (sum <= max && sum >= min) {
 			result.add(new ArrayList<Integer>(list));
-			if (min == max) {
+			if (sum == max) {
 				return;
 			}
 		}
